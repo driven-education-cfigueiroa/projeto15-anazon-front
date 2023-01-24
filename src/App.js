@@ -1,32 +1,23 @@
-import { data } from './data';
 import styled from 'styled-components';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import { ProductPage } from './pages/ProductPage';
 
 export const App = () => {
   return (
-    <>
-      <Header>
-        <a href="/">anazon</a>
-      </Header>
-      <Main>
-        <h1>Produtos em destaque</h1>
-        <Products>
-          {data.products.map((product) => (
-            <Product key={product._id}>
-              <a href={`/product/${product.slug}`}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <ProductInfo>
-                <a href={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </a>
-                <p>R$ {product.price.toString().replace('.', ',')}</p>
-                <button>Adicionar ao carrinho</button>
-              </ProductInfo>
-            </Product>
-          ))}
-        </Products>
-      </Main>
-    </>
+    <BrowserRouter>
+      <>
+        <Header>
+          <Link to="/">anazon</Link>
+        </Header>
+        <Main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/product/:slug" element={<ProductPage />} />
+          </Routes>
+        </Main>
+      </>
+    </BrowserRouter>
   );
 };
 
@@ -41,27 +32,5 @@ const Header = styled.header`
     color: #fff;
     font-weight: 700;
     text-decoration: none;
-  }
-`;
-
-const Products = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Product = styled.div`
-  border: 1px solid #404040;
-  margin: 1rem;
-  img {
-    width: 100%;
-    max-width: 350px;
-  }
-`;
-
-const ProductInfo = styled.div`
-  padding: 1rem;
-  p:nth-child(2) {
-    font-weight: 700;
   }
 `;
