@@ -1,13 +1,28 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { data } from '../data';
+import { useEffect, useState } from 'react';
+import { api as axios } from '../services/api';
 
 export const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get('/api/products');
+        console.log(result.data);
+        setProducts(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <h1>Produtos em destaque</h1>
       <Products>
-        {data.products.map((product) => (
+        {products.map((product) => (
           <Product key={product._id}>
             <Link to={`/product/${product.slug}`}>
               <img src={product.image} alt={product.name} />
