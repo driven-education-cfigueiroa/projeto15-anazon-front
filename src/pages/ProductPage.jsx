@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import { api as axios } from '../services/api';
 import Row from 'react-bootstrap/Row';
@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import { LoadingBox } from '../components/LoadingBox';
 import { MessageBox } from '../components/MessageBox';
 import { getError } from '../utils/getError';
+import { Store } from '../contexts/Store';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,6 +49,15 @@ export const ProductPage = () => {
     };
     fetchData();
   }, [slug]);
+  
+  // eslint-disable-next-line no-unused-vars
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...product, quantity: 1 },
+    });
+  };
 
   return (
     <>
@@ -115,7 +125,7 @@ export const ProductPage = () => {
                     {product.countInStock > 0 && (
                       <ListGroupItem>
                         <div className="d-grid">
-                          <Button variant="primary">
+                          <Button onClick={addToCartHandler} variant="primary">
                             Adicionar ao carrinho
                           </Button>
                         </div>
