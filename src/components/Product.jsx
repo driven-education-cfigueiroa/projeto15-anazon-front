@@ -13,8 +13,8 @@ export const Product = ({ product }) => {
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
         </Link>
-        <Rating rating={product.rating} numReviews={product.numReviews}/>
-        <Card.Text>R$ {product.price.toString().replace('.', ',')}</Card.Text>
+        <Rating rating={product.rating} numReviews={product.numReviews} />
+        <Card.Text>R$ {product.price?.toString().replace('.', ',')}</Card.Text>
         <Button>Adicionar ao carrinho</Button>
       </Card.Body>
     </Card>
