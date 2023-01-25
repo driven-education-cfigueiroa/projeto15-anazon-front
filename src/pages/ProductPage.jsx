@@ -49,13 +49,22 @@ export const ProductPage = () => {
     };
     fetchData();
   }, [slug]);
-  
-  // eslint-disable-next-line no-unused-vars
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const addToCartHandler = () => {
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    const alreadyInCart = cart.cartItems.find(
+      (item) => item._id === product._id
+    );
+    const quantity = alreadyInCart ? alreadyInCart.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Produto fora de estoque');
+      return;
+    }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity: 1 },
+      payload: { ...product, quantity },
     });
   };
 
