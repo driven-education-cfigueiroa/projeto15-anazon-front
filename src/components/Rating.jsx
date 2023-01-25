@@ -1,4 +1,3 @@
-
 export const Rating = ({ rating, numReviews }) => {
   return (
     <div className="rating">
