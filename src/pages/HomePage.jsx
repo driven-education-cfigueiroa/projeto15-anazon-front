@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { useEffect, useReducer } from 'react';
 import { api as axios } from '../services/api';
 import logger from 'use-reducer-logger';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Product } from '../components/Product';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -38,52 +39,23 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <h1>Produtos em destaque</h1>
-      <Products>
+      <div className="products">
         {loading ? (
           <h2>Carregando...</h2>
         ) : error ? (
           <h2>{error}</h2>
         ) : (
-          products.map((product) => (
-            <Product key={product._id}>
-              <Link to={`/product/${product.slug}`}>
-                <img src={product.image} alt={product.name} />
-              </Link>
-              <ProductInfo>
-                <Link to={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </Link>
-                <p>R$ {product.price.toString().replace('.', ',')}</p>
-                <button>Adicionar ao carrinho</button>
-              </ProductInfo>
-            </Product>
-          ))
+          <Row>
+          {products.map((product) => (
+            <Col sm={6} md={4} lg={3} className="mb-3" key={product._id}>
+              <Product product={product}></Product>
+            </Col>
+          ))}
+          </Row>
         )}
-      </Products>
-    </>
+      </div>
+    </div>
   );
 };
-
-const Products = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const Product = styled.div`
-  border: 1px solid #404040;
-  margin: 1rem;
-  img {
-    width: 100%;
-    max-width: 350px;
-  }
-`;
-
-const ProductInfo = styled.div`
-  padding: 1rem;
-  p:nth-child(2) {
-    font-weight: 700;
-  }
-`;
