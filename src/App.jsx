@@ -1,15 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Container, Nav, Navbar, Badge } from 'react-bootstrap';
+import { Store } from './contexts/Store';
 import { HomePage } from './pages/HomePage';
 import { ProductPage } from './pages/ProductPage';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
-import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
-import { Badge } from 'react-bootstrap';
-import { Store } from './contexts/Store';
-import { useContext } from 'react';
 import { CartPage } from './pages/CartPage';
+import { SigninPage } from './pages/SigninPage';
+import { SignupPage } from './pages/SignupPage';
 
 export const App = () => {
   const { state } = useContext(Store);
@@ -42,6 +40,8 @@ export const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/product/:slug" element={<ProductPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/signin" element={<SigninPage />} />
+              <Route path="/signup" element={<SignupPage />} />
             </Routes>
           </Container>
         </main>
