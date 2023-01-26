@@ -14,7 +14,12 @@ export const Product = ({ product }) => {
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>R$ {product.price?.toString().replace('.', ',')}</Card.Text>
+        <Card.Text>
+          {product.price?.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </Card.Text>
         <Button>Adicionar ao carrinho</Button>
       </Card.Body>
     </Card>

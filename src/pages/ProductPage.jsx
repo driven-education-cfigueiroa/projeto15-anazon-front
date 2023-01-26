@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { api as axios } from '../services/api';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,6 +29,7 @@ const reducer = (state, action) => {
 };
 
 export const ProductPage = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
   const [{ product, error, loading }, dispatch] = useReducer(reducer, {
@@ -66,6 +67,7 @@ export const ProductPage = () => {
       type: 'CART_ADD_ITEM',
       payload: { ...product, quantity },
     });
+    navigate('/cart');
   };
 
   return (
@@ -99,7 +101,11 @@ export const ProductPage = () => {
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Preço: R$ {product.price?.toString().replace('.', ',')}
+                  Preço:{' '}
+                  {product.price?.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Descrição:
@@ -115,7 +121,10 @@ export const ProductPage = () => {
                       <Row>
                         <Col>Preço:</Col>
                         <Col>
-                          R$ {product.price?.toString().replace('.', ',')}
+                          {product.price?.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                          })}
                         </Col>
                       </Row>
                     </ListGroupItem>
