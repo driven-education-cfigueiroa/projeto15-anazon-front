@@ -1,6 +1,5 @@
 import { useEffect, useReducer } from 'react';
 import { api as axios } from '../services/api';
-import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Product } from '../components/Product';
@@ -23,7 +22,7 @@ const reducer = (state, action) => {
 };
 
 export const HomePage = () => {
-  const [{ products, error, loading }, dispatch] = useReducer(logger(reducer), {
+  const [{ products, error, loading }, dispatch] = useReducer(reducer, {
     products: [],
     error: '',
     loading: false,
