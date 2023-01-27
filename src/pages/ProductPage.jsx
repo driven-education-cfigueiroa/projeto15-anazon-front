@@ -14,6 +14,7 @@ import { LoadingBox } from '../components/LoadingBox';
 import { MessageBox } from '../components/MessageBox';
 import { getError } from '../utils/getError';
 import { Store } from '../contexts/Store';
+import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,7 +61,7 @@ export const ProductPage = () => {
     const quantity = alreadyInCart ? alreadyInCart.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Produto fora de estoque');
+      toast.error('Produto fora de estoque');
       return;
     }
     ctxDispatch({

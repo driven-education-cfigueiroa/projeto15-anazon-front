@@ -5,6 +5,7 @@ import { Col, Row, Button, ListGroup, Card } from 'react-bootstrap';
 import { Store } from '../contexts/Store';
 import { MessageBox } from '../components/MessageBox';
 import { api as axios } from '../services/api';
+import { toast } from 'react-toastify';
 
 export const CartPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const CartPage = () => {
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Produto fora de estoque');
+      toast.error('Produto fora de estoque');
       return;
     }
     ctxDispatch({

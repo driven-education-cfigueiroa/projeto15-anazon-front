@@ -5,6 +5,7 @@ import { Rating } from './Rating';
 import { useContext } from 'react';
 import { Store } from '../contexts/Store';
 import { api as axios } from '../services/api';
+import { toast } from 'react-toastify';
 
 export const Product = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -17,7 +18,9 @@ export const Product = ({ product }) => {
     const quantity = alreadyInCart ? alreadyInCart.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Produto fora de estoque');
+      toast.warning(
+        'Todos os produtos deste tipo já foram adicionados ao carrinho!'
+      );
       return;
     }
     ctxDispatch({
