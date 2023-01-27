@@ -10,6 +10,7 @@ import { ProductPage } from './pages/ProductPage';
 import { CartPage } from './pages/CartPage';
 import { SigninPage } from './pages/SigninPage';
 import { SignupPage } from './pages/SignupPage';
+import { ShippingAddressPage } from './pages/ShippingAddressPage';
 
 export const App = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -18,6 +19,7 @@ export const App = () => {
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
   };
 
   return (
@@ -73,6 +75,7 @@ export const App = () => {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/signin" element={<SigninPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/shipping" element={<ShippingAddressPage />} />
             </Routes>
           </Container>
         </main>
