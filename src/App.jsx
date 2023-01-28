@@ -90,9 +90,7 @@ export const App = () => {
         </main>
         <footer>
           <div className="text-center">
-            Formas de pagamento aceitas: cartões de crédito (Visa, MasterCard,
-            Elo e American Express), cartões de débito (Visa e Elo), Boleto e
-            Pix.
+            Fale conosco | ajuda-anazon@anazon.com.br
           </div>
         </footer>
       </div>

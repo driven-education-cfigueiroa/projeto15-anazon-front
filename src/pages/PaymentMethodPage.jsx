@@ -14,7 +14,7 @@ export const PaymentMethodPage = () => {
   } = state;
 
   const [paymentMethodName, setPaymentMethod] = useState(
-    paymentMethod || 'PayPal'
+    paymentMethod || 'Pix'
   );
 
   useEffect(() => {
@@ -33,27 +33,27 @@ export const PaymentMethodPage = () => {
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className="container small-container">
         <Helmet>
-          <title>Payment Method</title>
+          <title>Método de Pagamento | Anazon</title>
         </Helmet>
-        <h1 className="my-3">Payment Method</h1>
+        <h1 className="my-3">Método de Pagamento</h1>
         <Form onSubmit={submitHandler}>
           <div className="mb-3">
             <Form.Check
               type="radio"
-              id="PayPal"
-              label="PayPal"
-              value="PayPal"
-              checked={paymentMethodName === 'PayPal'}
+              id="Pix"
+              label="Pix"
+              value="Pix"
+              checked={paymentMethodName === 'Pix'}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </div>
           <div className="mb-3">
             <Form.Check
               type="radio"
-              id="Stripe"
-              label="Stripe"
-              value="Stripe"
-              checked={paymentMethodName === 'Stripe'}
+              id="Boleto"
+              label="Boleto"
+              value="Boleto"
+              checked={paymentMethodName === 'Boleto'}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </div>

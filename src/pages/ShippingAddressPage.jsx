@@ -54,7 +54,7 @@ export const ShippingAddressPage = () => {
   return (
     <div>
       <Helmet>
-        <title>Endereço de Entrega</title>
+        <title>Endereço de Entrega | Anazon</title>
       </Helmet>
       <CheckoutSteps step1 step2 />
       <div className="container small-container">
