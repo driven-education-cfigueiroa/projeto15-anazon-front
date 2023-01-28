@@ -38,7 +38,7 @@ export const App = () => {
               <LinkContainer to="/">
                 <Navbar.Brand>anazon</Navbar.Brand>
               </LinkContainer>
-              <Nav className="me-auto">
+              <Nav className="ml-auto">
                 <Link to="/cart" className="nav-link">
                   Carrinho {}
                   {cart.cartItems.length > 0 && (
@@ -49,13 +49,6 @@ export const App = () => {
                 </Link>
                 {userInfo ? (
                   <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>Sua conta</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/orderhistory">
-                      <NavDropdown.Item>Seus pedidos</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
                     <Link
                       className="dropdown-item"
                       to="#signout"
